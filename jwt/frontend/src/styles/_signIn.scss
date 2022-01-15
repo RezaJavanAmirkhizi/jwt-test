@@ -1,0 +1,45 @@
+.signIn-box{
+    display: flex;
+    flex-direction: column;
+    padding: 30px 0;
+    align-items: center;
+    justify-content: flex-start;
+    gap: 1rem;
+    border-radius: 1rem;
+    width: 300px;
+    background-color:#F2F2F2;
+
+    h2{
+        color: #666D73;
+        font-size: 30px;
+        font-family: 'Bebas Neue', cursive;
+    }
+
+    button {
+        position: relative;
+        display: inline-block;
+        padding: 8px 40px;
+        outline: none;
+        text-align: center;
+        font-size: 22px;
+        letter-spacing: 1px;
+        text-decoration: none;
+        color: #666D73;
+        background: transparent;
+        cursor: pointer;
+        transition: ease-out 0.5s;
+        border-radius: 25px;
+        border: 2px solid #666D73;
+        box-shadow: inset 0 0 0 0 #666D73;
+        margin-top: 1.5rem;
+        font-family: 'Bebas Neue', cursive;
+        &:hover {
+            color: white;
+            box-shadow: inset 0 -100px 0 0 #666D73;
+        }
+        &:active {
+            transform: scale(0.9);
+        }
+    } 
+}
+

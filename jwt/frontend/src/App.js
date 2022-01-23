@@ -4,8 +4,14 @@ import SignIn from "../src/components/SignIn";
 import SignUp from "./components/Register";
 import Home from "../src/components/Home";
 import {Route, Routes} from "react-router-dom";
+import {useState} from 'react';
+import jwt_decode from "jwt-decode";
 
 function App() {
+
+  let [authTokens, setAuthTokens] = useState(()=> localStorage.getItem('authTokens') ? JSON.parse(localStorage.getItem('authTokens')) : null)
+  let [user, setUser] = useState(()=> localStorage.getItem('authTokens') ? jwt_decode(localStorage.getItem('authTokens')) : null)
+
   return (
     <div className="container">
 
@@ -13,8 +19,8 @@ function App() {
 
        <div className="pages">
          <Routes>
-           <Route exact path="/" element={<Home user={false} />} />
-           <Route exact path="/SignIn" element={<SignIn />} />
+           <Route exact path="/" element={<Home user={user} setUser={setUser} authTokens={authTokens} setAuthTokens={setAuthTokens} />} />
+           <Route exact path="/SignIn" element={<SignIn setUser={setUser} setAuthTokens={setAuthTokens} />} />
            <Route exact path="/SignUp" element={<SignUp />} />
          </Routes>
 

@@ -1,12 +1,46 @@
 import {Link} from "react-router-dom";
+import useAxios from "../utils/useAxios";
+import { useState, useEffect } from 'react';
 
 
 function Home(props){
 
+    const [notes, setNotes] = useState([]);
+
+    let api = useAxios(props.authTokens, props.setUser, props.setAuthTokens);
+
+    useEffect(() =>{ getNotes()}, [])
+  
+
+    let getNotes = async () => {
+        api.get('/home/')
+        .then(function(response){
+            setNotes(...notes, response.data);
+        })
+        .catch(function(err){
+            console.log(err);
+        })
+
+    }
+
+
+
+
+
     let Home;
 
     if(props.user){
-        Home = (<h2>Hi</h2>)
+        Home = (<h2>{
+            notes.map((note)=> {
+                return(
+                    <div key={note.id}>
+                    {note.title}
+                    <hr/>
+                    </div>
+                );
+
+            })
+            }</h2>)
     }
     else{
         Home = (
@@ -16,7 +50,6 @@ function Home(props){
                     <li><Link to="/SignIn" className="link">Sign in</Link></li>
                     <li><Link to="/SignUp" className="link">Sign up</Link></li>
                 </div>
-                 
             </div>
         )
     }
